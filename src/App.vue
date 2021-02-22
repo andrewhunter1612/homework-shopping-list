@@ -1,28 +1,51 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <header><h1>ToDo's</h1></header>
+    <section id="form-section">
+      <form v-on:submit.prevent="saveNewItem">
+        <input type="text" id="new-item" placeholder="Enter new item">
+
+        <label for="new-item">High</label>
+        <input type="radio" name="priority" id="new-item" value="high">
+
+        <label for="new-item">Low</label>
+        <input type="radio" name="priority" id="new-item" value="low">
+
+        <button type="submit">Save Item</button>
+      </form>
+    </section>
+    <section id="list-section">
+      <ul>
+        <li v-for="(item, index) in items" :key="index" :class="list-item">
+          <p>{{item.item}} is {{item.priority}} priority</p>
+        </li>
+      </ul>
+    </section>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    data(){
+      return {
+        items: [],
+        newItem: {},
+        newPriority: ""
+      }
+      
+    }, 
+    methods:{
+      saveNewItem: function(){
+        this.items.push({
+          item: this.newItem,
+          priority: this.priority
+        })
+      }
+      
+    }
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" scoped>
+
 </style>
