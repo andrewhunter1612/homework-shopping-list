@@ -3,13 +3,13 @@
     <header><h1>ToDo's</h1></header>
     <section id="form-section">
       <form v-on:submit.prevent="saveNewItem">
-        <input type="text" id="new-item" placeholder="Enter new item">
+        <input type="text" id="new-item" placeholder="Enter new item" v-model="newItem">
 
         <label for="new-item">High</label>
-        <input type="radio" name="priority" id="new-item" value="high">
+        <input type="radio" name="priority" id="new-item" value="high" v-model="newPriority">
 
         <label for="new-item">Low</label>
-        <input type="radio" name="priority" id="new-item" value="low">
+        <input type="radio" name="priority" id="new-item" value="low" v-model="newPriority">
 
         <button type="submit">Save Item</button>
       </form>
@@ -29,7 +29,7 @@
     data(){
       return {
         items: [],
-        newItem: {},
+        newItem: "",
         newPriority: ""
       }
       
@@ -38,7 +38,7 @@
       saveNewItem: function(){
         this.items.push({
           item: this.newItem,
-          priority: this.priority
+          priority: this.newPriority
         })
       }
       
